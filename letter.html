@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>편지 애니메이션</title>
+<style>
+  body {
+    margin: 0;
+    background: #f7f2e7;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* 봉투 감싸는 컨테이너 */
+  #wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  /* 봉투 이미지 */
+  #envelope {
+    width: 300px;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+  }
+
+  /* 편지 이미지 */
+  #letter {
+    position: absolute;
+    top: 50%;               /* 봉투 기준 중앙 */
+    left: 50%;
+    transform: translate(-50%, 0%) scale(0.1) rotate(-10deg); /* 시작: 작게 + 살짝 기울임 */
+    width: 200px;
+    opacity: 0;
+    transition: all 1s ease;
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  /* 클릭 후: 확대 + 중앙 + 기울기 0도로 변경 */
+#letter.show {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    width: 90vw;        /* 화면 너비의 90%까지 확대 */
+    max-width: 700px;   /* 최대 크기 700px로 증가 */
+    opacity: 1;
+    z-index: 999;
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+  <img id="envelope" src="envelope.png" alt="봉투">
+  <img id="letter" src="letter.png" alt="편지">
+</div>
+
+<script>
+  // 봉투 클릭 시 편지 애니메이션 실행
+  document.getElementById("envelope").addEventListener("click", () => {
+    document.getElementById("letter").classList.add("show");
+  });
+</script>
+
+</body>
+</html>
